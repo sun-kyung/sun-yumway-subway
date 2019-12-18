@@ -1,11 +1,29 @@
 package sunkyung.yumwaysubway;
 
+import java.util.Scanner;
+
 public class App3 {
   public static void main(String[] args) {
-    System.out.println("글제목: 서브웨이는 맛있어요");
-    System.out.println("내용: 매일 먹어도 질리지 않아요.");
-    System.out.println("작성일: 2019-12-10");
-    System.out.println("조회수: 0");
+    Scanner keyboard = new Scanner(System. in);
+    
+    System.out.print("쿠키? ");
+    String cookie = keyboard.nextLine();
+    
+    System.out.print("음료? ");
+    String beverage = keyboard.nextLine();
+    
+    System.out.print("사이드? ");
+    String side = keyboard.nextLine();
+    
+    System.out.println();
+
+    
+    System.out.printf("쿠키: %s\n", cookie);
+    System.out.printf("음료: %s\n", beverage);
+    System.out.printf("사이드: %s\n", side);
+    
+    keyboard.close();
+    
   }
 
 }

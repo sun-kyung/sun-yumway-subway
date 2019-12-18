@@ -1,14 +1,37 @@
 package sunkyung.yumwaysubway;
 
+import java.util.Scanner;
+
 public class App2 {
   public static void main(String[] args) {
-    System.out.println("번호: 1");
-    System.out.println("이름: 이선경");
-    System.out.println("이메일: esun1801@gmail.com");
-    System.out.println("암호: 1111");
-    System.out.println("사진: hong.png");
-    System.out.println("전화: 010-5382-1770");
-    System.out.println("가입일: 2019-12-10");
+    Scanner keyboard = new Scanner(System. in);
+    
+    System.out.print("빵? ");
+    String bread = keyboard.nextLine();
+    
+    System.out.print("메인? ");
+    String main = keyboard.nextLine();
+    
+    System.out.print("치즈? ");
+    String cheese = keyboard.nextLine();
+    
+    System.out.print("채소? ");
+    String vegetable = keyboard.nextLine();
+    
+    System.out.print("소스? ");
+    String sauce = keyboard.nextLine();
+    
+    
+    System.out.println();
+    
+    System.out.printf("빵: %s\n", bread);
+    System.out.printf("메인: %s\n", main);
+    System.out.printf("치즈: %s\n", cheese);
+    System.out.printf("채소: %s\n", vegetable);
+    System.out.printf("소스: %s\n", sauce);
+    
+    keyboard.close();
+    
   }
 
 }
