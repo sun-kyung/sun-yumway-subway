@@ -5,25 +5,35 @@ import java.util.Scanner;
 public class App3 {
   public static void main(String[] args) {
     Scanner keyboard = new Scanner(System. in);
-    
-    System.out.print("쿠키? ");
-    String cookie = keyboard.nextLine();
-    
-    System.out.print("음료? ");
-    String beverage = keyboard.nextLine();
-    
-    System.out.print("사이드? ");
-    String side = keyboard.nextLine();
-    
+    int count = 0;
+    String[] cookie = new String[100];
+    String[] beverage = new String[100];
+    String[] side = new String[100];
+    String response;
+
+    for(int i = 0; i < 5; i++) {
+      System.out.print("쿠키? ");
+      cookie[i] = keyboard.nextLine();
+
+      System.out.print("음료? ");
+      beverage[i] = keyboard.nextLine();
+
+      System.out.print("사이드? ");
+      side[i] = keyboard.nextLine();
+      
+      count++;
+
+      System.out.println();
+      System.out.print("계속 입력하시겠습니까? (Y/N)");
+      response = keyboard.nextLine();
+      if(!response.equalsIgnoreCase("Y")) {
+        break;
+      }
+    }
     System.out.println();
+    for (int i = 0; i < count; i++)
+      System.out.printf("%s, %s, %s\n", cookie[i], beverage[i], side[i]);
 
-    
-    System.out.printf("쿠키: %s\n", cookie);
-    System.out.printf("음료: %s\n", beverage);
-    System.out.printf("사이드: %s\n", side);
-    
     keyboard.close();
-    
   }
-
 }
