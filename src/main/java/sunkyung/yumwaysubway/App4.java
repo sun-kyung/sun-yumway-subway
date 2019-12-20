@@ -7,20 +7,30 @@ public class App4 {
   public static void main(String[] args) {
     Scanner keyboard = new Scanner(System.in);
     
-    int count = 0;
-    String[] title = new String[100];
-    String[] contents = new String[100];
-    Date[] today = new Date[100];
-    int[] viewCount = new int[100];
-    String response;
+    class Board{
+    String title;
+    String contents;
+    Date today;
+    int viewCount;
+    }
     
-    for(int i = 0; i < 5; i++) {
+    String response;
+    final int SIZE = 100;
+    Board[] boards = new Board[SIZE];
+    for(int i = 0; i < SIZE; i++) {
+      boards[i] = new Board();
+    }
+    int count = 0;
+    
+    for(int i = 0; i < SIZE; i++) {
+      Board board = boards[i];
     System.out.print("제목?");
-    title[i] = keyboard.nextLine();
+    board.title = keyboard.nextLine();
     System.out.print("내용?");
-    contents[i] = keyboard.nextLine();
-    today[i] = new Date(System.currentTimeMillis());
-    viewCount[i] = 0;
+    board.contents = keyboard.nextLine();
+    board.today = new Date(System.currentTimeMillis());
+    board.viewCount = 0;
+    boards[i] = board;
     
     count++;
     System.out.println();
@@ -31,9 +41,10 @@ public class App4 {
      }
     }
     System.out.println();
-    for(int i = 0; i < count; i++)
-    System.out.printf("\n%s\n%s\n%s\n%s\n", title[i], contents[i], today[i], viewCount[i]);
-    // 제목, 내용, 작성일, 조회수 순
+    for(int i = 0; i < count; i++) {
+      Board board = boards[i];
+    System.out.printf("\n%s\n%s\n%s\n%s\n", board.title, board.contents, board.today, board.viewCount);
+    }
     
     keyboard.close();
     

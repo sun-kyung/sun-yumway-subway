@@ -5,30 +5,41 @@ import java.util.Scanner;
 public class App2 {
   public static void main(String[] args) {
     Scanner keyboard = new Scanner(System. in);
+    
 
-    int count = 0;
-    String[] bread = new String[100];
-    String[] main = new String[100];
-    String[] cheese = new String[100];
-    String[] vegetable = new String[100];
-    String[] sauce = new String[100];
+    class Order{
+    String bread;
+    String main;
+    String cheese;
+    String vegetable;
+    String sauce;
+    }
+
     String response;
-
-    for(int i = 0; i < 5; i++) {
+    final int SIZE = 100;
+    Order[] orders = new Order[SIZE];
+    for(int i = 0; i < SIZE; i++) {
+      orders[i] = new Order();
+    }
+    int count = 0;
+    
+    for(int i = 0; i < SIZE; i++) {
+      Order order = orders[i];
       System.out.print("빵? ");
-      bread[i] = keyboard.nextLine();
+      order.bread = keyboard.nextLine();
 
       System.out.print("메인? ");
-      main[i] = keyboard.nextLine();
+      order.main = keyboard.nextLine();
 
       System.out.print("치즈? ");
-      cheese[i] = keyboard.nextLine();
+      order.cheese = keyboard.nextLine();
 
       System.out.print("채소? ");
-      vegetable[i] = keyboard.nextLine();
+      order.vegetable = keyboard.nextLine();
 
       System.out.print("소스? ");
-      sauce[i] = keyboard.nextLine();
+      order.sauce = keyboard.nextLine();
+      orders[i] = order;
 
       count++;
       System.out.println();
@@ -41,12 +52,11 @@ public class App2 {
 
 
     System.out.println();
-    for(int i = 0; i < count; i++)
+    for(int i = 0; i < count; i++) {
+      Order order = orders[i];
       System.out.printf("\n빵: %s\n메인: %s\n치즈: %s\n채소: %s\n소스: %s\n", 
-          bread[i], main[i], cheese[i], vegetable[i], sauce[i]);
-
+          order.bread, order.main, order.cheese, order.vegetable, order.sauce);
+    }
     keyboard.close();
-
   }
-
 }

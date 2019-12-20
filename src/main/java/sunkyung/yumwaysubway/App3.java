@@ -5,22 +5,34 @@ import java.util.Scanner;
 public class App3 {
   public static void main(String[] args) {
     Scanner keyboard = new Scanner(System. in);
-    int count = 0;
-    String[] cookie = new String[100];
-    String[] beverage = new String[100];
-    String[] side = new String[100];
-    String response;
+    
+    class Side{
+    String cookie;
+    String beverage;
+    String others;
+    }
 
-    for(int i = 0; i < 5; i++) {
+    String response;
+    final int SIZE = 100;
+    Side[] sides = new Side[SIZE];
+    for(int i = 0; i < SIZE; i++) {
+      sides[i] = new Side();
+    }
+    int count = 0;
+      
+      
+    for(int i = 0; i < SIZE; i++) {
+      Side side = sides[i];
       System.out.print("쿠키? ");
-      cookie[i] = keyboard.nextLine();
+      side.cookie = keyboard.nextLine();
 
       System.out.print("음료? ");
-      beverage[i] = keyboard.nextLine();
+      side.beverage = keyboard.nextLine();
 
-      System.out.print("사이드? ");
-      side[i] = keyboard.nextLine();
+      System.out.print("그 외? ");
+      side.others = keyboard.nextLine();
       
+      sides[i] = side;
       count++;
 
       System.out.println();
@@ -31,8 +43,10 @@ public class App3 {
       }
     }
     System.out.println();
-    for (int i = 0; i < count; i++)
-      System.out.printf("%s, %s, %s\n", cookie[i], beverage[i], side[i]);
+    for (int i = 0; i < count; i++) {
+      Side side = sides[i];
+      System.out.printf("%s, %s, %s\n", side.cookie, side.beverage, side.others);
+    }
 
     keyboard.close();
   }
