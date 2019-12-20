@@ -6,7 +6,7 @@
 
 ## 실습 소스 및 결과
 
-- src/main/java/com/eomcs/lms/App.java 파일로 소스코드 통합
+- src/main/java/com/bitcamp/myproject/App.java 파일로 소스코드 통합
 
 
 ## 실습

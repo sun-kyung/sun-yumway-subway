@@ -8,28 +8,30 @@
 
 ## 실습 소스 및 결과
 
-- src/main/java/com/eomcs/lms/App.java 변경
+- src/main/java/com/bitcamp/myproject/App.java 변경
 
 ## 실습
 
 ### 작업1) 수업 데이터를 처리하는 코드를 메서드로 분리하라.
 
-- App.java (App.java.01)
-    - 수업 등록 코드를 addLesson() 메서드로 분리한다.
-    - 수업 목록 출력 코드를 listLesson() 메서드로 분리한다.
+- App.java (App.java.02)
+    - 주문 등록 코드를 addOrder() 메서드로 분리한다.
+    - 주문 목록 출력 코드를 listOrder() 메서드로 분리한다.
     - 두 메서드가 공통으로 사용하는 변수를 `클래스 변수`로 전환한다.
+    
 
 ### 작업2) 회원 데이터를 처리하는 코드를 메서드로 분리하라.
 
-- App.java (App.java.02)
-    - 회원 등록 코드를 addMember() 메서드로 분리한다.
-    - 회원 목록 출력 코드를 listMember() 메서드로 분리한다.
+- App.java (App.java.03)
+    
+    - 사이드 등록 코드를 addSide() 메서드로 분리한다.
+    - 사이드 목록 출력 코드를 listSide() 메서드로 분리한다.
     - 두 메서드가 공통으로 사용하는 변수를 `클래스 변수`로 전환한다.
 
 
 ### 작업3) 게시물 데이터를 처리하는 코드를 메서드로 분리하라.
 
-- App.java
+- App.java (App.java.04)
     - 게시물 등록 코드를 addBoard() 메서드로 분리한다.
     - 게시물 목록 출력 코드를 listBoard() 메서드로 분리한다.
     - 두 메서드가 공통으로 사용하는 변수를 `클래스 변수`로 전환한다.
