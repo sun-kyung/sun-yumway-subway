@@ -3,12 +3,14 @@ package sunkyung.yumwaysubway;
 import java.util.Scanner;
 import sunkyung.yumwaysubway.handler.BoardHandler;
 import sunkyung.yumwaysubway.handler.OrderHandler;
+import sunkyung.yumwaysubway.handler.OrderHandler2;
 import sunkyung.yumwaysubway.handler.SideHandler;
 public class App {
 
   static Scanner keyboard = new Scanner(System. in);
   public static void main(String[] args) {
     OrderHandler.keyboard = keyboard;
+    OrderHandler2.keyboard = keyboard;
     SideHandler.keyboard = keyboard;
     BoardHandler.keyboard = keyboard;
 
@@ -30,11 +32,18 @@ public class App {
       switch(command) {
         case "/order/add":
           OrderHandler.addOrder();
-
           break;
 
         case "/order/list":
           OrderHandler.listOrder();
+          break;
+          
+        case "/order2/add":
+          OrderHandler2.addOrder();
+          break;
+
+        case "/order2/list":
+          OrderHandler2.listOrder();
           break;
 
         case "/side/add":

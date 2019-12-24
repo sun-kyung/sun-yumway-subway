@@ -2,14 +2,10 @@ package sunkyung.yumwaysubway.handler;
 
 import java.sql.Date;
 import java.util.Scanner;
+import sunkyung.yumwaysubway.domain.Board;
 
 public class BoardHandler {
-  public static class Board{
-    String title;
-    String contents;
-    Date today;
-    int viewCount;
-  }
+
   public static final int BOARD_SIZE = 100;
   static Board[] boards = new Board[BOARD_SIZE];
   static int boardCount = 0;

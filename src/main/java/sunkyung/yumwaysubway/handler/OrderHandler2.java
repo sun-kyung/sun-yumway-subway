@@ -3,7 +3,7 @@ package sunkyung.yumwaysubway.handler;
 import java.util.Scanner;
 import sunkyung.yumwaysubway.domain.Order;
 
-public class OrderHandler {
+public class OrderHandler2 {
 
   public static final int ORDER_SIZE = 100;
   static Order[] orders = new Order[ORDER_SIZE];

@@ -8,9 +8,9 @@
 
 - sunkyung.yumwaysubway.handler 패키지 추가
 - src/main/java/sunkyung/yumwaysubway/App.java 변경
-- src/main/java/sunkyung/yumwaysubway/OrderHandler.java 변경
-- src/main/java/sunkyung/yumwaysubway/SideHandler.java 변경
-- src/main/java/sunkyung/yumwaysubway/BoardHandler.java 변경
+- src/main/java/sunkyung/yumwaysubway/handler/OrderHandler.java 변경
+- src/main/java/sunkyung/yumwaysubway/handler/SideHandler.java 변경
+- src/main/java/sunkyung/yumwaysubway/handler/BoardHandler.java 변경
 - sunkyung.yumwaysubway.domain 패키지 추가
 - src/main/java/sunkyung/yumwaysubway/domain/Order.java 변경
 - src/main/java/sunkyung/yumwaysubway/domain/Side.java 변경

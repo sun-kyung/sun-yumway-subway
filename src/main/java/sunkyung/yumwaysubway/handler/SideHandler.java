@@ -1,12 +1,9 @@
 package sunkyung.yumwaysubway.handler;
 
 import java.util.Scanner;
+import sunkyung.yumwaysubway.domain.Side;
 public class SideHandler {
-  public static class Side{
-    String cookie;
-    String beverage;
-    String others;
-  }
+
   public static final int SIDE_SIZE = 100;
   static Side[] sides = new Side[SIDE_SIZE];
   static int sideCount = 0;
