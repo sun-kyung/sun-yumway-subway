@@ -1,27 +1,27 @@
-package sunkyung.yumwaysubway;
+package sunkyung.yumwaysubway.handler;
 
 import java.sql.Date;
 import java.util.Scanner;
 
 public class BoardHandler {
-  static class Board{
-    static String title;
-    static String contents;
-    static Date today;
-    static int viewCount;
+  public static class Board{
+    String title;
+    String contents;
+    Date today;
+    int viewCount;
   }
-  static final int BOARD_SIZE = 100;
+  public static final int BOARD_SIZE = 100;
   static Board[] boards = new Board[BOARD_SIZE];
   static int boardCount = 0;
-  static Scanner keyboard;
+  public static Scanner keyboard;
 
-  static void listBoard() {
+  public static void listBoard() {
     for(int i = 0; i < boardCount; i++) {
       Board b = boards[i];
       System.out.printf("\n%s\n%s\n%s\n%s\n", b.title, b.contents, b.today, b.viewCount);
     }
   }
-  static void addBoard() {
+  public static void addBoard() {
     Board board = new Board();
     System.out.print("제목?");
     board.title = keyboard.nextLine();

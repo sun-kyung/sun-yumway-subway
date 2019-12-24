@@ -1,21 +1,21 @@
-package sunkyung.yumwaysubway;
+package sunkyung.yumwaysubway.handler;
 
 import java.util.Scanner;
 
 public class OrderHandler {
-  static class Order{
+  public static class Order{
     String bread;
     String main;
     String cheese;
     String vegetable;
     String sauce;
   }
-  static final int ORDER_SIZE = 100;
+  public static final int ORDER_SIZE = 100;
   static Order[] orders = new Order[ORDER_SIZE];
   static int orderCount = 0;
-  static Scanner keyboard;
+  public static Scanner keyboard;
 
-  static void addOrder() {
+  public static void addOrder() {
     Order order = new Order();
     System.out.print("빵? ");
     order.bread = keyboard.nextLine();
@@ -34,7 +34,7 @@ public class OrderHandler {
     orders[orderCount++] = order;
     System.out.println("저장하였습니다.");
   }
-  static void listOrder() {
+  public static void listOrder() {
 
     System.out.println();
     for(int i = 0; i < orderCount; i++) {
