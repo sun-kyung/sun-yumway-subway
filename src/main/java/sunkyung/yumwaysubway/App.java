@@ -3,16 +3,17 @@ package sunkyung.yumwaysubway;
 import java.util.Scanner;
 import sunkyung.yumwaysubway.handler.BoardHandler;
 import sunkyung.yumwaysubway.handler.OrderHandler;
-import sunkyung.yumwaysubway.handler.OrderHandler2;
 import sunkyung.yumwaysubway.handler.SideHandler;
 public class App {
 
   static Scanner keyboard = new Scanner(System. in);
   public static void main(String[] args) {
-    OrderHandler.keyboard = keyboard;
-    OrderHandler2.keyboard = keyboard;
-    SideHandler.keyboard = keyboard;
-    BoardHandler.keyboard = keyboard;
+    
+    OrderHandler o1 = new OrderHandler(keyboard);
+    OrderHandler o2 = new OrderHandler(keyboard);
+    SideHandler s1 = new SideHandler(keyboard);
+    BoardHandler b1 = new BoardHandler(keyboard);
+
 
     System.out.println("프로젝트명: 맛있는 서브웨이");
     System.out.println("설명: 서브웨이 샌드위치 종류와 조합");
@@ -31,35 +32,35 @@ public class App {
 
       switch(command) {
         case "/order/add":
-          OrderHandler.addOrder();
+          o1.addOrder();
           break;
 
         case "/order/list":
-          OrderHandler.listOrder();
+          o1.listOrder();
           break;
           
         case "/order2/add":
-          OrderHandler2.addOrder();
+          o2.addOrder();
           break;
 
         case "/order2/list":
-          OrderHandler2.listOrder();
+          o2.listOrder();
           break;
 
         case "/side/add":
-          SideHandler.addSide();
+          s1.addSide();
           break;
 
         case "/side/list":
-          SideHandler.listSide();
+          s1.listSide();
           break;
 
         case "/board/add":
-          BoardHandler.addBoard();
+          b1.addBoard();
           break;
 
         case "/board/list":
-          BoardHandler.listBoard();
+          b1.listBoard();
           break;
 
         default: 

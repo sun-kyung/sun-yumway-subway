@@ -5,26 +5,31 @@ import sunkyung.yumwaysubway.domain.Side;
 public class SideHandler {
 
   public static final int SIDE_SIZE = 100;
-  static Side[] sides = new Side[SIDE_SIZE];
-  static int sideCount = 0;
-  public static Scanner keyboard;
+  Side[] sides;
+  int sideCount = 0;
+  public Scanner input;
   
-  public static void addSide() {
+  public SideHandler(Scanner input) {
+    this.input = input;
+    this.sides = new Side[SIDE_SIZE];
+  }
+  
+  public void addSide() {
     Side side = new Side();
     System.out.print("쿠키? ");
-    side.cookie = keyboard.nextLine();
+    side.cookie = input.nextLine();
 
     System.out.print("음료? ");
-    side.beverage = keyboard.nextLine();
+    side.beverage = input.nextLine();
 
     System.out.print("그 외? ");
-    side.others = keyboard.nextLine();
-    sides[sideCount++] = side;
+    side.others = input.nextLine();
+    this.sides[this.sideCount++] = side;
     System.out.println("저장하였습니다.");
   }
-  public static void listSide() {
-    for (int i = 0; i < sideCount; i++) {
-      Side s = sides[i];
+  public void listSide() {
+    for (int i = 0; i < this.sideCount; i++) {
+      Side s = this.sides[i];
       System.out.printf("%s, %s, %s\n", s.cookie, s.beverage, s.others);
     }
   }
