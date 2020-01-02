@@ -5,22 +5,23 @@ import java.util.Scanner;
 import sunkyung.yumwaysubway.domain.Board;
 
 public class BoardHandler {
-  BoardList boardList = new BoardList();
+  ArrayList boardList;
   public Scanner input;
   
   public BoardHandler(Scanner input) {
     this.input = input;
-    boardList = new BoardList();
+    boardList = new ArrayList();
   }
   
   public BoardHandler(Scanner input, int capacity) {
     this.input = input;
-    boardList = new BoardList(capacity);
+    boardList = new ArrayList(capacity);
   }
 
   public void listBoard() {
-    Board[] boards = boardList.toArray();
-    for (Board b : boards) {
+    Object[] arr = this.boardList.toArray();
+    for (Object obj : arr) {
+      Board b = (Board)obj;
       System.out.printf("\n%s\n%s\n%s\n%s\n", 
           b.getTitle(), b.getContents(), b.getToday(), b.getViewCount());
     }

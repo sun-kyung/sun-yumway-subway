@@ -5,17 +5,17 @@ import sunkyung.yumwaysubway.domain.Order;
 
 public class OrderHandler {
 
-  OrderList orderList = new OrderList();
+  ArrayList orderList;
   public Scanner input;
   
   public OrderHandler(Scanner input) {
     this.input = input;
-    orderList = new OrderList();
+    orderList = new ArrayList();
   }
   
   public OrderHandler(Scanner input, int capacity) {
     this.input = input;
-    orderList = new OrderList(capacity);
+    orderList = new ArrayList(capacity);
   }
 
   public void addOrder() {
@@ -40,8 +40,9 @@ public class OrderHandler {
   public void listOrder() {
 
     System.out.println();
-    Order[] orders = orderList.toArray();
-    for (Order o : orders) {
+    Object[] arr = orderList.toArray();
+    for (Object obj : arr) {
+      Order o = (Order)obj;
       System.out.printf("\n빵: %s\n메인: %s\n치즈: %s\n채소: %s\n소스: %s\n", 
           o.getBread(), o.getMain(), o.getCheese(), o.getVegetable(), o.getSauce());
     }
