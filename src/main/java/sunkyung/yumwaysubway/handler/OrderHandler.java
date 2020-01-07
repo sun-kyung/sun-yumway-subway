@@ -2,20 +2,21 @@ package sunkyung.yumwaysubway.handler;
 
 import java.util.Scanner;
 import sunkyung.yumwaysubway.domain.Order;
+import sunkyung.yumwaysubway.util.ArrayList;
 
 public class OrderHandler {
 
-  ArrayList orderList;
+  ArrayList<Order> orderList;
   public Scanner input;
   
   public OrderHandler(Scanner input) {
     this.input = input;
-    orderList = new ArrayList();
+    orderList = new ArrayList<>();
   }
   
   public OrderHandler(Scanner input, int capacity) {
     this.input = input;
-    orderList = new ArrayList(capacity);
+    orderList = new ArrayList<>(capacity);
   }
 
   public void addOrder() {
@@ -40,9 +41,8 @@ public class OrderHandler {
   public void listOrder() {
 
     System.out.println();
-    Object[] arr = orderList.toArray();
-    for (Object obj : arr) {
-      Order o = (Order)obj;
+    Order[] arr = orderList.toArray(new Order[this.orderList.size()]);
+    for (Order o : arr) {
       System.out.printf("\n빵: %s\n메인: %s\n치즈: %s\n채소: %s\n소스: %s\n", 
           o.getBread(), o.getMain(), o.getCheese(), o.getVegetable(), o.getSauce());
     }

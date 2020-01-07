@@ -2,18 +2,19 @@ package sunkyung.yumwaysubway.handler;
 
 import java.util.Scanner;
 import sunkyung.yumwaysubway.domain.Side;
+import sunkyung.yumwaysubway.util.ArrayList;
 public class SideHandler {
 
-  ArrayList sideList;
+  ArrayList<Side> sideList;
   public Scanner input;
   
   public SideHandler(Scanner input) {
     this.input = input;
-    sideList = new ArrayList();
+    sideList = new ArrayList<>();
   }
   public SideHandler(Scanner input, int capacity) {
     this.input = input;
-    sideList = new ArrayList(capacity);
+    sideList = new ArrayList<>(capacity);
   }
   
   public void addSide() {
@@ -30,9 +31,8 @@ public class SideHandler {
     System.out.println("저장하였습니다.");
   }
   public void listSide() {
-    Object[] arr = sideList.toArray();
-    for (Object obj : arr) {
-      Side s = (Side)obj;
+    Side[] arr = this.sideList.toArray(new Side[] {});
+    for (Side s : arr) {
       System.out.printf("%s, %s, %s\n", s.getCookie(), s.getBeverage(), s.getOthers());
     }
   }

@@ -3,25 +3,26 @@ package sunkyung.yumwaysubway.handler;
 import java.sql.Date;
 import java.util.Scanner;
 import sunkyung.yumwaysubway.domain.Board;
+import sunkyung.yumwaysubway.util.ArrayList;
 
 public class BoardHandler {
-  ArrayList boardList;
+  ArrayList<Board> boardList;
   public Scanner input;
   
   public BoardHandler(Scanner input) {
     this.input = input;
-    boardList = new ArrayList();
+    boardList = new ArrayList<>();
   }
   
   public BoardHandler(Scanner input, int capacity) {
     this.input = input;
-    boardList = new ArrayList(capacity);
+    boardList = new ArrayList<>(capacity);
   }
 
   public void listBoard() {
-    Object[] arr = this.boardList.toArray();
-    for (Object obj : arr) {
-      Board b = (Board)obj;
+    Board[] arr = new Board[this.boardList.size()];
+    this.boardList.toArray(arr);
+    for (Board b : arr) {
       System.out.printf("\n%s\n%s\n%s\n%s\n", 
           b.getTitle(), b.getContents(), b.getToday(), b.getViewCount());
     }
