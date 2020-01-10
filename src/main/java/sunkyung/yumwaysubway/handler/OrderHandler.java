@@ -1,22 +1,17 @@
 package sunkyung.yumwaysubway.handler;
 
 import sunkyung.yumwaysubway.domain.Order;
-import sunkyung.yumwaysubway.util.ArrayList;
+import sunkyung.yumwaysubway.util.LinkedList;
 import sunkyung.yumwaysubway.util.Prompt;
 
 public class OrderHandler {
 
-  ArrayList<Order> orderList;
+  LinkedList<Order> orderList;
   public Prompt prompt;
 
   public OrderHandler(Prompt prompt) {
     this.prompt = prompt;
-    orderList = new ArrayList<>();
-  }
-
-  public OrderHandler(Prompt prompt, int capacity) {
-    this.prompt = prompt;
-    orderList = new ArrayList<>(capacity);
+    orderList = new LinkedList<>();
   }
 
   public void addOrder() {

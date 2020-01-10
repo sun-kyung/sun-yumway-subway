@@ -2,23 +2,17 @@ package sunkyung.yumwaysubway.handler;
 
 import java.sql.Date;
 import sunkyung.yumwaysubway.domain.Board;
-import sunkyung.yumwaysubway.util.ArrayList;
+import sunkyung.yumwaysubway.util.LinkedList;
 import sunkyung.yumwaysubway.util.Prompt;
 
 public class BoardHandler {
-  ArrayList<Board> boardList;
+  LinkedList<Board> boardList;
   public Prompt prompt;
   
   public BoardHandler(Prompt prompt) {
     this.prompt = prompt;
-    boardList = new ArrayList<>();
+    boardList = new LinkedList<>();
   }
-  
-  public BoardHandler(Prompt prompt, int capacity) {
-    this.prompt = prompt;
-    boardList = new ArrayList<>(capacity);
-  }
-
 
   public void addBoard() {
     Board board = new Board();

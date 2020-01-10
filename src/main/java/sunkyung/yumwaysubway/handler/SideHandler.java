@@ -1,20 +1,16 @@
 package sunkyung.yumwaysubway.handler;
 
 import sunkyung.yumwaysubway.domain.Side;
-import sunkyung.yumwaysubway.util.ArrayList;
+import sunkyung.yumwaysubway.util.LinkedList;
 import sunkyung.yumwaysubway.util.Prompt;
 public class SideHandler {
 
-  ArrayList<Side> sideList;
+  LinkedList<Side> sideList;
   public Prompt prompt;
   
   public SideHandler(Prompt prompt) {
     this.prompt = prompt;
-    sideList = new ArrayList<>();
-  }
-  public SideHandler(Prompt prompt, int capacity) {
-    this.prompt = prompt;
-    sideList = new ArrayList<>(capacity);
+    sideList = new LinkedList<>();
   }
   
   public void addSide() {
