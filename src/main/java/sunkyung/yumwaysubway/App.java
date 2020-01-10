@@ -4,15 +4,15 @@ import java.util.Scanner;
 import sunkyung.yumwaysubway.handler.BoardHandler;
 import sunkyung.yumwaysubway.handler.OrderHandler;
 import sunkyung.yumwaysubway.handler.SideHandler;
+import sunkyung.yumwaysubway.util.Prompt;
 public class App {
 
   static Scanner keyboard = new Scanner(System. in);
   public static void main(String[] args) {
-    
-    OrderHandler o1 = new OrderHandler(keyboard);
-    OrderHandler o2 = new OrderHandler(keyboard);
-    SideHandler s1 = new SideHandler(keyboard);
-    BoardHandler b1 = new BoardHandler(keyboard);
+    Prompt prompt = new Prompt(keyboard);
+    OrderHandler o1 = new OrderHandler(prompt);
+    SideHandler s1 = new SideHandler(prompt);
+    BoardHandler b1 = new BoardHandler(prompt);
 
 
     System.out.println("프로젝트명: 맛있는 서브웨이");
@@ -39,12 +39,16 @@ public class App {
           o1.listOrder();
           break;
           
-        case "/order2/add":
-          o2.addOrder();
+        case "/order/delete":
+          o1.deleteOrder();
           break;
-
-        case "/order2/list":
-          o2.listOrder();
+          
+        case "/order/detail":
+          o1.detailOrder();
+          break;
+          
+        case "/order/update":
+          o1.updateOrder();
           break;
 
         case "/side/add":
@@ -54,6 +58,18 @@ public class App {
         case "/side/list":
           s1.listSide();
           break;
+          
+        case "/side/detail":
+          s1.detailSide();
+          break;
+          
+        case "/side/delete":
+          s1.deleteSide();
+          break;
+          
+        case "/side/update":
+          s1.updateSide();
+          break;
 
         case "/board/add":
           b1.addBoard();
@@ -61,6 +77,18 @@ public class App {
 
         case "/board/list":
           b1.listBoard();
+          break;
+          
+        case "/board/detail":
+          b1.detailBoard();
+          break;
+          
+        case "/board/delete":
+          b1.deleteBoard();
+          break;
+          
+        case "/board/update":
+          b1.updateBoard();
           break;
 
         default: 
