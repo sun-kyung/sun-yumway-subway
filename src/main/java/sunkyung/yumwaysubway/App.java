@@ -5,9 +5,12 @@ import sunkyung.yumwaysubway.handler.BoardHandler;
 import sunkyung.yumwaysubway.handler.OrderHandler;
 import sunkyung.yumwaysubway.handler.SideHandler;
 import sunkyung.yumwaysubway.util.Prompt;
+import sunkyung.yumwaysubway.util.Stack;
 public class App {
 
   static Scanner keyboard = new Scanner(System. in);
+  static Stack<String> commandStack = new Stack<>();
+  
   public static void main(String[] args) {
     Prompt prompt = new Prompt(keyboard);
     OrderHandler o1 = new OrderHandler(prompt);
@@ -29,6 +32,10 @@ public class App {
     do {
       System.out.print("\n명령> ");
       command = keyboard.nextLine();
+      if (command.length() == 0)
+        continue;
+      
+      commandStack.push(command);
 
       switch(command) {
         case "/order/add":
@@ -90,6 +97,10 @@ public class App {
         case "/board/update":
           b1.updateBoard();
           break;
+          
+        case "history":
+          printCommandHistory();
+          break;
 
         default: 
           if (!command.equalsIgnoreCase("quit")) {
@@ -101,4 +112,34 @@ public class App {
     System.out.println("안녕!");
     keyboard.close();
   }
+
+  private static void printCommandHistory() {
+    Stack<String> historyStack = (Stack<String>)commandStack.clone();
+    int count = 0;
+    while (!historyStack.empty()) {
+      System.out.println(historyStack.pop());
+      count++;
+      if((count % 5) == 0) {
+        System.out.println(":");
+        String str = keyboard.nextLine();
+        if (str.equalsIgnoreCase("q")) {
+          break;
+        }
+      }
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
