@@ -1,17 +1,17 @@
 package sunkyung.yumwaysubway.handler;
 
 import sunkyung.yumwaysubway.domain.Order;
-import sunkyung.yumwaysubway.util.LinkedList;
+import sunkyung.yumwaysubway.util.AbstractList;
 import sunkyung.yumwaysubway.util.Prompt;
 
 public class OrderHandler {
 
-  LinkedList<Order> orderList;
+  AbstractList<Order> orderList;
   public Prompt prompt;
 
-  public OrderHandler(Prompt prompt) {
+  public OrderHandler(Prompt prompt, AbstractList<Order> list) {
     this.prompt = prompt;
-    orderList = new LinkedList<>();
+    orderList = list;
   }
 
   public void addOrder() {

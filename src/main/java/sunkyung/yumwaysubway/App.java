@@ -1,9 +1,14 @@
 package sunkyung.yumwaysubway;
 
 import java.util.Scanner;
+import sunkyung.yumwaysubway.domain.Board;
+import sunkyung.yumwaysubway.domain.Order;
+import sunkyung.yumwaysubway.domain.Side;
 import sunkyung.yumwaysubway.handler.BoardHandler;
 import sunkyung.yumwaysubway.handler.OrderHandler;
 import sunkyung.yumwaysubway.handler.SideHandler;
+import sunkyung.yumwaysubway.util.ArrayList;
+import sunkyung.yumwaysubway.util.LinkedList;
 import sunkyung.yumwaysubway.util.Prompt;
 import sunkyung.yumwaysubway.util.Queue;
 import sunkyung.yumwaysubway.util.Stack;
@@ -15,9 +20,15 @@ public class App {
   
   public static void main(String[] args) {
     Prompt prompt = new Prompt(keyboard);
-    OrderHandler o1 = new OrderHandler(prompt);
-    SideHandler s1 = new SideHandler(prompt);
-    BoardHandler b1 = new BoardHandler(prompt);
+    
+    LinkedList<Order> orderList = new LinkedList<>();
+    OrderHandler o1 = new OrderHandler(prompt, orderList);
+    
+    ArrayList<Side> sideList = new ArrayList<>();
+    SideHandler s1 = new SideHandler(prompt, sideList);
+    
+    LinkedList<Board> boardList = new LinkedList<>();
+    BoardHandler b1 = new BoardHandler(prompt, boardList);
 
 
     System.out.println("프로젝트명: 맛있는 서브웨이");
