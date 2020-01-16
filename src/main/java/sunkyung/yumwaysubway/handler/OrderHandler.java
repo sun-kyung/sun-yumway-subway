@@ -1,13 +1,14 @@
 package sunkyung.yumwaysubway.handler;
 
+import java.util.AbstractList;
+import java.util.Iterator;
+import java.util.List;
 import sunkyung.yumwaysubway.domain.Order;
-import sunkyung.yumwaysubway.util.AbstractList;
-import sunkyung.yumwaysubway.util.Iterator;
 import sunkyung.yumwaysubway.util.Prompt;
 
 public class OrderHandler {
 
-  AbstractList<Order> orderList;
+  List<Order> orderList;
   public Prompt prompt;
 
   public OrderHandler(Prompt prompt, AbstractList<Order> list) {

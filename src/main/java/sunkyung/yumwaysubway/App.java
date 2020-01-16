@@ -1,5 +1,11 @@
 package sunkyung.yumwaysubway;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import sunkyung.yumwaysubway.domain.Board;
 import sunkyung.yumwaysubway.domain.Order;
@@ -7,17 +13,12 @@ import sunkyung.yumwaysubway.domain.Side;
 import sunkyung.yumwaysubway.handler.BoardHandler;
 import sunkyung.yumwaysubway.handler.OrderHandler;
 import sunkyung.yumwaysubway.handler.SideHandler;
-import sunkyung.yumwaysubway.util.ArrayList;
-import sunkyung.yumwaysubway.util.Iterator;
-import sunkyung.yumwaysubway.util.LinkedList;
 import sunkyung.yumwaysubway.util.Prompt;
-import sunkyung.yumwaysubway.util.Queue;
-import sunkyung.yumwaysubway.util.Stack;
 public class App {
 
   static Scanner keyboard = new Scanner(System. in);
-  static Stack<String> commandStack = new Stack<>();
-  static Queue<String> commandQueue = new Queue<>();
+  static Deque<String> commandStack = new ArrayDeque<>();
+  static Queue<String> commandQueue = new LinkedList<>();
   
   public static void main(String[] args) {
     Prompt prompt = new Prompt(keyboard);

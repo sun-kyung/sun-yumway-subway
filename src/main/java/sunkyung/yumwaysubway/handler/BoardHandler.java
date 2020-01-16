@@ -1,13 +1,14 @@
 package sunkyung.yumwaysubway.handler;
 
 import java.sql.Date;
+import java.util.AbstractList;
+import java.util.Iterator;
+import java.util.List;
 import sunkyung.yumwaysubway.domain.Board;
-import sunkyung.yumwaysubway.util.AbstractList;
-import sunkyung.yumwaysubway.util.Iterator;
 import sunkyung.yumwaysubway.util.Prompt;
 
 public class BoardHandler {
-  AbstractList<Board> boardList;
+  List<Board> boardList;
   public Prompt prompt;
   
   public BoardHandler(Prompt prompt, AbstractList<Board> list) {
