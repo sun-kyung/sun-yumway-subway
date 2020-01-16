@@ -3,6 +3,7 @@ package sunkyung.yumwaysubway.handler;
 import java.sql.Date;
 import sunkyung.yumwaysubway.domain.Board;
 import sunkyung.yumwaysubway.util.AbstractList;
+import sunkyung.yumwaysubway.util.Iterator;
 import sunkyung.yumwaysubway.util.Prompt;
 
 public class BoardHandler {
@@ -26,9 +27,9 @@ public class BoardHandler {
   }
 
   public void listBoard() {
-    Board[] arr = new Board[this.boardList.size()];
-    this.boardList.toArray(arr);
-    for (Board b : arr) {
+    Iterator<Board> iterator = boardList.iterator();
+    while (iterator.hasNext()) {
+      Board b = iterator.next();
       System.out.printf("\n%d\n%s\n%s\n%s\n%s\n", 
           b.getNo(), b.getTitle(), b.getContents(), b.getToday(), b.getViewCount());
     }
@@ -37,7 +38,7 @@ public class BoardHandler {
   public void detailBoard() {
     int index = indexOfBoard(prompt.inputInt("번호? "));
     if (index == -1) {
-      System.out.println("게시글 인덱스가 유효하지 않습니다");
+      System.out.println("게시글 번호가 유효하지 않습니다");
       return;
     }
     Board board = this.boardList.get(index);

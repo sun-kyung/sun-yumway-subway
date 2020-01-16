@@ -2,6 +2,7 @@ package sunkyung.yumwaysubway.handler;
 
 import sunkyung.yumwaysubway.domain.Side;
 import sunkyung.yumwaysubway.util.AbstractList;
+import sunkyung.yumwaysubway.util.Iterator;
 import sunkyung.yumwaysubway.util.Prompt;
 public class SideHandler {
 
@@ -24,9 +25,9 @@ public class SideHandler {
     System.out.println("저장하였습니다.");
   }
   public void listSide() {
-    Side[] arr = new Side[this.sideList.size()];
-    this.sideList.toArray(arr);
-    for (Side s : arr) {
+    Iterator<Side> iterator = sideList.iterator();
+    while (iterator.hasNext()) {
+      Side s = iterator.next();
       System.out.printf("%d, %s, %s, %s\n", 
           s.getNo(), s.getCookie(), s.getBeverage(), s.getOthers());
     }

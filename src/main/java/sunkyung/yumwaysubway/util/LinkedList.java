@@ -6,7 +6,6 @@ public class LinkedList<E> extends AbstractList<E>{
   
   Node<E> first;
   Node<E> last;
-  int size;
   
   @Override
   public void add(E value) {

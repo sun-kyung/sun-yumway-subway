@@ -8,6 +8,7 @@ import sunkyung.yumwaysubway.handler.BoardHandler;
 import sunkyung.yumwaysubway.handler.OrderHandler;
 import sunkyung.yumwaysubway.handler.SideHandler;
 import sunkyung.yumwaysubway.util.ArrayList;
+import sunkyung.yumwaysubway.util.Iterator;
 import sunkyung.yumwaysubway.util.LinkedList;
 import sunkyung.yumwaysubway.util.Prompt;
 import sunkyung.yumwaysubway.util.Queue;
@@ -113,11 +114,11 @@ public class App {
           break;
           
         case "history":
-          printCommandHistory();
+          printCommandHistory(commandStack.iterator());
           break;
           
         case "history2":
-          printCommandHistory2();
+          printCommandHistory(commandQueue.iterator());
           break;
 
         default: 
@@ -131,26 +132,10 @@ public class App {
     keyboard.close();
   }
 
-  private static void printCommandHistory2() {
-    Queue<String> historyQueue = commandQueue.clone();
+  private static void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
-    while (historyQueue.size() > 0) {
-      System.out.println(historyQueue.poll());
-      if((++count % 5) == 0) {
-        System.out.println(":");
-        String str = keyboard.nextLine();
-        if (str.equalsIgnoreCase("q")) {
-          break;
-        }
-      }
-    }
-  }
-
-  private static void printCommandHistory() {
-    Stack<String> historyStack = (Stack<String>)commandStack.clone();
-    int count = 0;
-    while (!historyStack.empty()) {
-      System.out.println(historyStack.pop());
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next());
       count++;
       if((count % 5) == 0) {
         System.out.println(":");

@@ -2,6 +2,7 @@ package sunkyung.yumwaysubway.handler;
 
 import sunkyung.yumwaysubway.domain.Order;
 import sunkyung.yumwaysubway.util.AbstractList;
+import sunkyung.yumwaysubway.util.Iterator;
 import sunkyung.yumwaysubway.util.Prompt;
 
 public class OrderHandler {
@@ -27,9 +28,9 @@ public class OrderHandler {
   }
   public void listOrder() {
 
-    System.out.println();
-    Order[] arr = orderList.toArray(new Order[this.orderList.size()]);
-    for (Order o : arr) {
+    Iterator<Order> iterator = orderList.iterator();
+    while (iterator.hasNext()) {
+      Order o = iterator.next();
       System.out.printf("\n%d, %s, %s, %s, %s, %s\n", 
           o.getNo(), o.getBread(), o.getMain(), o.getCheese(), o.getVegetable(), o.getSauce());
     }

@@ -7,7 +7,6 @@ public class ArrayList<E> extends AbstractList<E>{
   private static final int DEFAULT_CAPACITY = 2;
   
   Object[] elementData;
-  int size;
   
   public ArrayList() {
     this.elementData = new Object[DEFAULT_CAPACITY];
