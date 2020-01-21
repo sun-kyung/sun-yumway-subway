@@ -3,6 +3,7 @@ package sunkyung.yumwaysubway;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,27 +11,54 @@ import java.util.Scanner;
 import sunkyung.yumwaysubway.domain.Board;
 import sunkyung.yumwaysubway.domain.Order;
 import sunkyung.yumwaysubway.domain.Side;
-import sunkyung.yumwaysubway.handler.BoardHandler;
-import sunkyung.yumwaysubway.handler.OrderHandler;
-import sunkyung.yumwaysubway.handler.SideHandler;
+import sunkyung.yumwaysubway.handler.BoardAddCommand;
+import sunkyung.yumwaysubway.handler.BoardDeleteCommand;
+import sunkyung.yumwaysubway.handler.BoardDetailCommand;
+import sunkyung.yumwaysubway.handler.BoardListCommand;
+import sunkyung.yumwaysubway.handler.BoardUpdateCommand;
+import sunkyung.yumwaysubway.handler.Command;
+import sunkyung.yumwaysubway.handler.OrderAddCommand;
+import sunkyung.yumwaysubway.handler.OrderDeleteCommand;
+import sunkyung.yumwaysubway.handler.OrderDetailCommand;
+import sunkyung.yumwaysubway.handler.OrderListCommand;
+import sunkyung.yumwaysubway.handler.OrderUpdateCommand;
+import sunkyung.yumwaysubway.handler.SideAddCommand;
+import sunkyung.yumwaysubway.handler.SideDeleteCommand;
+import sunkyung.yumwaysubway.handler.SideDetailCommand;
+import sunkyung.yumwaysubway.handler.SideListCommand;
+import sunkyung.yumwaysubway.handler.SideUpdateCommand;
 import sunkyung.yumwaysubway.util.Prompt;
+
 public class App {
 
-  static Scanner keyboard = new Scanner(System. in);
+  static Scanner keyboard = new Scanner(System.in);
   static Deque<String> commandStack = new ArrayDeque<>();
   static Queue<String> commandQueue = new LinkedList<>();
-  
+
   public static void main(String[] args) {
     Prompt prompt = new Prompt(keyboard);
-    
+    HashMap<String, Command> commandMap = new HashMap<>();
+
     LinkedList<Order> orderList = new LinkedList<>();
-    OrderHandler o1 = new OrderHandler(prompt, orderList);
-    
+    commandMap.put("/order/add", new OrderAddCommand(prompt, orderList));
+    commandMap.put("/order/delete", new OrderDeleteCommand(prompt, orderList));
+    commandMap.put("/order/detail", new OrderDetailCommand(prompt, orderList));
+    commandMap.put("/order/update", new OrderUpdateCommand(prompt, orderList));
+    commandMap.put("/order/list", new OrderListCommand(orderList));
+
     ArrayList<Side> sideList = new ArrayList<>();
-    SideHandler s1 = new SideHandler(prompt, sideList);
-    
+    commandMap.put("/side/add", new SideAddCommand(prompt, sideList));
+    commandMap.put("/side/delete", new SideDeleteCommand(prompt, sideList));
+    commandMap.put("/side/detail", new SideDetailCommand(prompt, sideList));
+    commandMap.put("/side/update", new SideUpdateCommand(prompt, sideList));
+    commandMap.put("/side/list", new SideListCommand(sideList));
+
     LinkedList<Board> boardList = new LinkedList<>();
-    BoardHandler b1 = new BoardHandler(prompt, boardList);
+    commandMap.put("/board/update", new BoardUpdateCommand(prompt, boardList));
+    commandMap.put("/board/add", new BoardAddCommand(prompt, boardList));
+    commandMap.put("/board/detail", new BoardDetailCommand(prompt, boardList));
+    commandMap.put("/board/delete", new BoardDeleteCommand(prompt, boardList));
+    commandMap.put("/board/list", new BoardListCommand(boardList));
 
 
     System.out.println("프로젝트명: 맛있는 서브웨이");
@@ -44,92 +72,33 @@ public class App {
 
 
     String command;
-    do {
+    while (true) {
       System.out.print("\n명령> ");
       command = keyboard.nextLine();
       if (command.length() == 0)
         continue;
-      
+
+      if (command.equals("quit")) {
+        System.out.println("안녕!");
+        break;
+      } else if (command.equals("history")) {
+        printCommandHistory(commandStack.iterator());
+        continue;
+      } else if (command.equals("history2")) {
+        printCommandHistory(commandQueue.iterator());
+        continue;
+      }
+
       commandStack.push(command);
       commandQueue.offer(command);
+      Command commandHandler = commandMap.get(command);
 
-      switch(command) {
-        case "/order/add":
-          o1.addOrder();
-          break;
-
-        case "/order/list":
-          o1.listOrder();
-          break;
-          
-        case "/order/delete":
-          o1.deleteOrder();
-          break;
-          
-        case "/order/detail":
-          o1.detailOrder();
-          break;
-          
-        case "/order/update":
-          o1.updateOrder();
-          break;
-
-        case "/side/add":
-          s1.addSide();
-          break;
-
-        case "/side/list":
-          s1.listSide();
-          break;
-          
-        case "/side/detail":
-          s1.detailSide();
-          break;
-          
-        case "/side/delete":
-          s1.deleteSide();
-          break;
-          
-        case "/side/update":
-          s1.updateSide();
-          break;
-
-        case "/board/add":
-          b1.addBoard();
-          break;
-
-        case "/board/list":
-          b1.listBoard();
-          break;
-          
-        case "/board/detail":
-          b1.detailBoard();
-          break;
-          
-        case "/board/delete":
-          b1.deleteBoard();
-          break;
-          
-        case "/board/update":
-          b1.updateBoard();
-          break;
-          
-        case "history":
-          printCommandHistory(commandStack.iterator());
-          break;
-          
-        case "history2":
-          printCommandHistory(commandQueue.iterator());
-          break;
-
-        default: 
-          if (!command.equalsIgnoreCase("quit")) {
-            System.out.println("실행할 수 없는 명령입니다.");
-          }
+      if (commandHandler != null) {
+        commandHandler.execute();
+      } else if (!command.equalsIgnoreCase("quit")) {
+        System.out.println("실행할 수 없는 명령입니다");
       }
     }
-    while (!command.equalsIgnoreCase("quit"));
-    System.out.println("안녕!");
     keyboard.close();
   }
 
@@ -138,7 +107,7 @@ public class App {
     while (iterator.hasNext()) {
       System.out.println(iterator.next());
       count++;
-      if((count % 5) == 0) {
+      if ((count % 5) == 0) {
         System.out.println(":");
         String str = keyboard.nextLine();
         if (str.equalsIgnoreCase("q")) {
@@ -148,17 +117,5 @@ public class App {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
