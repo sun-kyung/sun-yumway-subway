@@ -7,7 +7,26 @@ public class Order {
   private String cheese;
   private String vegetable;
   private String sauce;
-  
+
+  public static Order valueOf(String csv) {
+    String[] data = csv.split(",");
+
+    Order order = new Order();
+    order.setNo(Integer.parseInt(data[0]));
+    order.setBread(data[1]);
+    order.setMain(data[2]);
+    order.setCheese(data[3]);
+    order.setVegetable(data[4]);
+    order.setSauce(data[5]);
+
+    return order;
+  }
+
+  public String toCsvString() {
+    return String.format("%d,%s,%s,%s,%s,%s", this.getNo(), this.getBread(), this.getMain(),
+        this.getCheese(), this.getVegetable(), this.getSauce());
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -20,6 +39,7 @@ public class Order {
     result = prime * result + ((vegetable == null) ? 0 : vegetable.hashCode());
     return result;
   }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -58,39 +78,51 @@ public class Order {
       return false;
     return true;
   }
+
   public int getNo() {
     return no;
   }
+
   public void setNo(int no) {
     this.no = no;
   }
+
   public String getBread() {
     return bread;
   }
+
   public void setBread(String bread) {
     this.bread = bread;
   }
+
   public String getMain() {
     return main;
   }
+
   public void setMain(String main) {
     this.main = main;
   }
+
   public String getCheese() {
     return cheese;
   }
+
   public void setCheese(String cheese) {
     this.cheese = cheese;
   }
+
   public String getVegetable() {
     return vegetable;
   }
+
   public void setVegetable(String vegetable) {
     this.vegetable = vegetable;
   }
+
   public String getSauce() {
     return sauce;
   }
+
   public void setSauce(String sauce) {
     this.sauce = sauce;
   }
