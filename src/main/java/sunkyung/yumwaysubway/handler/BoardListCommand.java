@@ -1,6 +1,5 @@
 package sunkyung.yumwaysubway.handler;
 
-import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.List;
 import sunkyung.yumwaysubway.domain.Board;
@@ -8,7 +7,7 @@ import sunkyung.yumwaysubway.domain.Board;
 public class BoardListCommand implements Command {
   List<Board> boardList;
 
-  public BoardListCommand(AbstractList<Board> list) {
+  public BoardListCommand(List<Board> list) {
     boardList = list;
   }
 

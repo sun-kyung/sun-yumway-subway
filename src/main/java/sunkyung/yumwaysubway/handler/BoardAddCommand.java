@@ -1,7 +1,6 @@
 package sunkyung.yumwaysubway.handler;
 
 import java.sql.Date;
-import java.util.AbstractList;
 import java.util.List;
 import sunkyung.yumwaysubway.domain.Board;
 import sunkyung.yumwaysubway.util.Prompt;
@@ -10,7 +9,7 @@ public class BoardAddCommand implements Command {
   List<Board> boardList;
   public Prompt prompt;
 
-  public BoardAddCommand(Prompt prompt, AbstractList<Board> list) {
+  public BoardAddCommand(Prompt prompt, List<Board> list) {
     this.prompt = prompt;
     boardList = list;
   }

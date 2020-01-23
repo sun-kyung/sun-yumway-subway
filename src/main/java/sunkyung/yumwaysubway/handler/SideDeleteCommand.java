@@ -1,6 +1,5 @@
 package sunkyung.yumwaysubway.handler;
 
-import java.util.AbstractList;
 import java.util.List;
 import sunkyung.yumwaysubway.domain.Side;
 import sunkyung.yumwaysubway.util.Prompt;
@@ -10,7 +9,7 @@ public class SideDeleteCommand implements Command {
   List<Side> sideList;
   public Prompt prompt;
 
-  public SideDeleteCommand(Prompt prompt, AbstractList<Side> list) {
+  public SideDeleteCommand(Prompt prompt, List<Side> list) {
     this.prompt = prompt;
     sideList = list;
   }

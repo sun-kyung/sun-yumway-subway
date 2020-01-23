@@ -1,6 +1,5 @@
 package sunkyung.yumwaysubway.handler;
 
-import java.util.AbstractList;
 import java.util.List;
 import sunkyung.yumwaysubway.domain.Order;
 import sunkyung.yumwaysubway.util.Prompt;
@@ -10,7 +9,7 @@ public class OrderDetailCommand implements Command {
   List<Order> orderList;
   public Prompt prompt;
 
-  public OrderDetailCommand(Prompt prompt, AbstractList<Order> list) {
+  public OrderDetailCommand(Prompt prompt, List<Order> list) {
     this.prompt = prompt;
     orderList = list;
   }

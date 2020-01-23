@@ -1,6 +1,5 @@
 package sunkyung.yumwaysubway.handler;
 
-import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.List;
 import sunkyung.yumwaysubway.domain.Order;
@@ -9,7 +8,7 @@ public class OrderListCommand implements Command {
 
   List<Order> orderList;
 
-  public OrderListCommand(AbstractList<Order> list) {
+  public OrderListCommand(List<Order> list) {
     orderList = list;
   }
 

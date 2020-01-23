@@ -1,6 +1,5 @@
 package sunkyung.yumwaysubway.handler;
 
-import java.util.AbstractList;
 import java.util.List;
 import sunkyung.yumwaysubway.domain.Board;
 import sunkyung.yumwaysubway.util.Prompt;
@@ -9,7 +8,7 @@ public class BoardDetailCommand implements Command {
   List<Board> boardList;
   public Prompt prompt;
 
-  public BoardDetailCommand(Prompt prompt, AbstractList<Board> list) {
+  public BoardDetailCommand(Prompt prompt, List<Board> list) {
     this.prompt = prompt;
     boardList = list;
   }

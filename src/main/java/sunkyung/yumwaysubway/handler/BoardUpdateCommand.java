@@ -1,6 +1,5 @@
 package sunkyung.yumwaysubway.handler;
 
-import java.util.AbstractList;
 import java.util.List;
 import sunkyung.yumwaysubway.domain.Board;
 import sunkyung.yumwaysubway.util.Prompt;
@@ -9,7 +8,7 @@ public class BoardUpdateCommand implements Command {
   List<Board> boardList;
   public Prompt prompt;
 
-  public BoardUpdateCommand(Prompt prompt, AbstractList<Board> list) {
+  public BoardUpdateCommand(Prompt prompt, List<Board> list) {
     this.prompt = prompt;
     boardList = list;
   }
