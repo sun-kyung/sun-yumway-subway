@@ -1,5 +1,7 @@
 package sunkyung.yumwaysubway;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -137,7 +139,7 @@ public class App {
 
   private static void loadOrderData() {
     File file = new File("./order.json");
-    try (FileReader in = new FileReader(file)) {
+    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
       orderList.addAll(Arrays.asList(new Gson().fromJson(in, Order[].class)));
       System.out.printf("총 %d개의 샌드위치 데이터를 로딩했습니다\n", orderList.size());
     } catch (IOException e) {
@@ -148,7 +150,7 @@ public class App {
   private static void saveOrderData() {
     File file = new File("./order.json");
 
-    try (FileWriter out = new FileWriter(file)) {
+    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
       out.write(new Gson().toJson(orderList));
       System.out.printf("총 %d개의 샌드위치 데이터를 저장했습니다\n", orderList.size());
     } catch (IOException e) {
@@ -158,7 +160,7 @@ public class App {
 
   private static void loadSideData() {
     File file = new File("./side.json");
-    try (FileReader in = new FileReader(file)) {
+    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
       sideList.addAll(Arrays.asList(new Gson().fromJson(in, Side[].class)));
 
       System.out.printf("총 %d개의 사이드 데이터를 로딩했습니다\n", sideList.size());
@@ -170,7 +172,7 @@ public class App {
   private static void saveSideData() {
     File file = new File("./side.json");
 
-    try (FileWriter out = new FileWriter(file)) {
+    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
       out.write(new Gson().toJson(sideList));
       System.out.printf("총 %d개의 사이드 데이터를 저장했습니다\n", sideList.size());
     } catch (IOException e) {
@@ -180,7 +182,7 @@ public class App {
 
   private static void loadBoardData() {
     File file = new File("./board.json");
-    try (FileReader in = new FileReader(file)) {
+    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
       boardList.addAll(Arrays.asList(new Gson().fromJson(in, Board[].class)));
       System.out.printf("총 %d개의 게시물 데이터를 로딩했습니다\n", boardList.size());
     } catch (IOException e) {
@@ -191,7 +193,7 @@ public class App {
   private static void saveBoardData() {
     File file = new File("./board.json");
 
-    try (FileWriter out = new FileWriter(file)) {
+    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
       out.write(new Gson().toJson(boardList));
       System.out.printf("총 %d개의 게시물 데이터를 저장했습니다\n", boardList.size());
     } catch (IOException e) {
