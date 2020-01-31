@@ -1,6 +1,10 @@
 package sunkyung.yumwaysubway.domain;
 
-public class Side {
+import java.io.Serializable;
+
+public class Side implements Serializable {
+
+  private static final long serialVersionUID = 20200131L;
   private int no;
   private String cookie;
   private String beverage;

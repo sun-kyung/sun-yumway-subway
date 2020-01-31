@@ -1,6 +1,10 @@
 package sunkyung.yumwaysubway.domain;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
+
+  private static final long serialVersionUID = 20200131L;
   private int no;
   private String bread;
   private String main;
