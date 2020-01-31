@@ -1,14 +1,16 @@
 package sunkyung.yumwaysubway;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,7 +18,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
-import com.google.gson.Gson;
 import sunkyung.yumwaysubway.domain.Board;
 import sunkyung.yumwaysubway.domain.Order;
 import sunkyung.yumwaysubway.domain.Side;
@@ -138,9 +139,20 @@ public class App {
   }
 
   private static void loadOrderData() {
-    File file = new File("./order.json");
-    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-      orderList.addAll(Arrays.asList(new Gson().fromJson(in, Order[].class)));
+    File file = new File("./order.data");
+    try (DataInputStream in =
+        new DataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
+      int size = in.readInt();
+      for (int i = 0; i < size; i++) {
+        Order order = new Order();
+        order.setNo(in.readInt());
+        order.setBread(in.readUTF());
+        order.setMain(in.readUTF());
+        order.setCheese(in.readUTF());
+        order.setVegetable(in.readUTF());
+        order.setSauce(in.readUTF());
+        orderList.add(order);
+      }
       System.out.printf("총 %d개의 샌드위치 데이터를 로딩했습니다\n", orderList.size());
     } catch (IOException e) {
       System.out.println("파일 읽기 중 오류 발생! -" + e.getMessage());
@@ -148,10 +160,19 @@ public class App {
   }
 
   private static void saveOrderData() {
-    File file = new File("./order.json");
+    File file = new File("./order.data");
 
-    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-      out.write(new Gson().toJson(orderList));
+    try (DataOutputStream out =
+        new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+      out.writeInt(orderList.size());
+      for (Order order : orderList) {
+        out.writeInt(order.getNo());
+        out.writeUTF(order.getBread());
+        out.writeUTF(order.getMain());
+        out.writeUTF(order.getCheese());
+        out.writeUTF(order.getVegetable());
+        out.writeUTF(order.getSauce());
+      }
       System.out.printf("총 %d개의 샌드위치 데이터를 저장했습니다\n", orderList.size());
     } catch (IOException e) {
       System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
@@ -159,9 +180,18 @@ public class App {
   }
 
   private static void loadSideData() {
-    File file = new File("./side.json");
-    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-      sideList.addAll(Arrays.asList(new Gson().fromJson(in, Side[].class)));
+    File file = new File("./side.data");
+    try (DataInputStream in =
+        new DataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
+      int size = in.readInt();
+      for (int i = 0; i < size; i++) {
+        Side side = new Side();
+        side.setNo(in.readInt());
+        side.setCookie(in.readUTF());
+        side.setBeverage(in.readUTF());
+        side.setOthers(in.readUTF());
+        sideList.add(side);
+      }
 
       System.out.printf("총 %d개의 사이드 데이터를 로딩했습니다\n", sideList.size());
     } catch (IOException e) {
@@ -170,10 +200,17 @@ public class App {
   }
 
   private static void saveSideData() {
-    File file = new File("./side.json");
+    File file = new File("./side.data");
 
-    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-      out.write(new Gson().toJson(sideList));
+    try (DataOutputStream out =
+        new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+      out.writeInt(sideList.size());
+      for (Side side : sideList) {
+        out.writeInt(side.getNo());
+        out.writeUTF(side.getCookie());
+        out.writeUTF(side.getBeverage());
+        out.writeUTF(side.getOthers());
+      }
       System.out.printf("총 %d개의 사이드 데이터를 저장했습니다\n", sideList.size());
     } catch (IOException e) {
       System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
@@ -181,9 +218,19 @@ public class App {
   }
 
   private static void loadBoardData() {
-    File file = new File("./board.json");
-    try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-      boardList.addAll(Arrays.asList(new Gson().fromJson(in, Board[].class)));
+    File file = new File("./board.data");
+    try (DataInputStream in =
+        new DataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
+      int size = in.readInt();
+      for (int i = 0; i < size; i++) {
+        Board board = new Board();
+        board.setNo(in.readInt());
+        board.setTitle(in.readUTF());
+        board.setContents(in.readUTF());
+        board.setToday(Date.valueOf(in.readUTF()));
+        board.setViewCount(in.readInt());
+        boardList.add(board);
+      }
       System.out.printf("총 %d개의 게시물 데이터를 로딩했습니다\n", boardList.size());
     } catch (IOException e) {
       System.out.println("파일 읽기 중 오류 발생! -" + e.getMessage());
@@ -191,10 +238,18 @@ public class App {
   }
 
   private static void saveBoardData() {
-    File file = new File("./board.json");
+    File file = new File("./board.data");
 
-    try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-      out.write(new Gson().toJson(boardList));
+    try (DataOutputStream out =
+        new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
+      out.writeInt(boardList.size());
+      for (Board board : boardList) {
+        out.writeInt(board.getNo());
+        out.writeUTF(board.getTitle());
+        out.writeUTF(board.getContents());
+        out.writeUTF(board.getToday().toString());
+        out.writeInt(board.getViewCount());
+      }
       System.out.printf("총 %d개의 게시물 데이터를 저장했습니다\n", boardList.size());
     } catch (IOException e) {
       System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
