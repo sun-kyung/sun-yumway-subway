@@ -12,11 +12,14 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.Set;
+import sunkyung.yumwaysubway.context.ApplicationContextListener;
 import sunkyung.yumwaysubway.domain.Board;
 import sunkyung.yumwaysubway.domain.Order;
 import sunkyung.yumwaysubway.domain.Side;
@@ -40,14 +43,38 @@ import sunkyung.yumwaysubway.util.Prompt;
 
 public class App {
 
-  static Scanner keyboard = new Scanner(System.in);
-  static Deque<String> commandStack = new ArrayDeque<>();
-  static Queue<String> commandQueue = new LinkedList<>();
-  static List<Order> orderList = new ArrayList<>();
-  static List<Side> sideList = new ArrayList<>();
-  static List<Board> boardList = new ArrayList<>();
+  Scanner keyboard = new Scanner(System.in);
+  Deque<String> commandStack = new ArrayDeque<>();
+  Queue<String> commandQueue = new LinkedList<>();
+  List<Order> orderList = new ArrayList<>();
+  List<Side> sideList = new ArrayList<>();
+  List<Board> boardList = new ArrayList<>();
 
-  public static void main(String[] args) {
+  Set<ApplicationContextListener> listeners = new HashSet<>();
+
+  public void addApplicationContextListener(ApplicationContextListener listener) {
+    listeners.add(listener);
+  }
+
+  public void removeApplicationContextListener(ApplicationContextListener listener) {
+    listeners.remove(listener);
+  }
+
+  private void notifyApplicationInitialized() {
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized();
+    }
+  }
+
+  private void notifyApplicationDestroyed() {
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextDestroyed();
+    }
+  }
+
+  public void service() {
+
+    notifyApplicationInitialized();
 
     loadOrderData();
     loadSideData();
@@ -120,9 +147,11 @@ public class App {
     saveOrderData();
     saveSideData();
     saveBoardData();
+
+    notifyApplicationDestroyed();
   }
 
-  private static void printCommandHistory(Iterator<String> iterator) {
+  private void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
     while (iterator.hasNext()) {
       System.out.println(iterator.next());
@@ -138,7 +167,7 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private static void loadOrderData() {
+  private void loadOrderData() {
     File file = new File("./order.ser");
     try (ObjectInputStream in =
         new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
@@ -149,7 +178,7 @@ public class App {
     }
   }
 
-  private static void saveOrderData() {
+  private void saveOrderData() {
     File file = new File("./order.ser");
 
     try (ObjectOutputStream out =
@@ -162,7 +191,7 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private static void loadSideData() {
+  private void loadSideData() {
     File file = new File("./side.ser");
     try (ObjectInputStream in =
         new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
@@ -174,7 +203,7 @@ public class App {
     }
   }
 
-  private static void saveSideData() {
+  private void saveSideData() {
     File file = new File("./side.ser");
 
     try (ObjectOutputStream out =
@@ -187,7 +216,7 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private static void loadBoardData() {
+  private void loadBoardData() {
     File file = new File("./board.ser");
     try (ObjectInputStream in =
         new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
@@ -198,7 +227,7 @@ public class App {
     }
   }
 
-  private static void saveBoardData() {
+  private void saveBoardData() {
     File file = new File("./board.ser");
 
     try (ObjectOutputStream out =
@@ -208,6 +237,11 @@ public class App {
     } catch (IOException e) {
       System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
     }
+  }
+
+  public static void main(String[] args) {
+    App app = new App();
+    app.service();
   }
 }
 
