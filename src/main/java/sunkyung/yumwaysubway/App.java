@@ -1,21 +1,13 @@
 package sunkyung.yumwaysubway;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Set;
@@ -46,11 +38,9 @@ public class App {
   Scanner keyboard = new Scanner(System.in);
   Deque<String> commandStack = new ArrayDeque<>();
   Queue<String> commandQueue = new LinkedList<>();
-  List<Order> orderList = new ArrayList<>();
-  List<Side> sideList = new ArrayList<>();
-  List<Board> boardList = new ArrayList<>();
 
   Set<ApplicationContextListener> listeners = new HashSet<>();
+  Map<String, Object> context = new HashMap<>();
 
   public void addApplicationContextListener(ApplicationContextListener listener) {
     listeners.add(listener);
@@ -62,23 +52,25 @@ public class App {
 
   private void notifyApplicationInitialized() {
     for (ApplicationContextListener listener : listeners) {
-      listener.contextInitialized();
+      listener.contextInitialized(context);
     }
   }
 
   private void notifyApplicationDestroyed() {
     for (ApplicationContextListener listener : listeners) {
-      listener.contextDestroyed();
+      listener.contextDestroyed(context);
     }
   }
 
+  @SuppressWarnings("unchecked")
   public void service() {
 
     notifyApplicationInitialized();
 
-    loadOrderData();
-    loadSideData();
-    loadBoardData();
+    List<Board> boardList = (List<Board>) context.get("boardList");
+    List<Order> orderList = (List<Order>) context.get("orderList");
+    List<Side> sideList = (List<Side>) context.get("sideList");
+
     Prompt prompt = new Prompt(keyboard);
     HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -144,9 +136,6 @@ public class App {
       }
     }
     keyboard.close();
-    saveOrderData();
-    saveSideData();
-    saveBoardData();
 
     notifyApplicationDestroyed();
   }
@@ -166,81 +155,11 @@ public class App {
     }
   }
 
-  @SuppressWarnings("unchecked")
-  private void loadOrderData() {
-    File file = new File("./order.ser");
-    try (ObjectInputStream in =
-        new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-      orderList = (List<Order>) in.readObject();
-      System.out.printf("총 %d개의 샌드위치 데이터를 로딩했습니다\n", orderList.size());
-    } catch (Exception e) {
-      System.out.println("파일 읽기 중 오류 발생! -" + e.getMessage());
-    }
-  }
 
-  private void saveOrderData() {
-    File file = new File("./order.ser");
-
-    try (ObjectOutputStream out =
-        new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-      out.writeObject(orderList);
-      System.out.printf("총 %d개의 샌드위치 데이터를 저장했습니다\n", orderList.size());
-    } catch (IOException e) {
-      System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadSideData() {
-    File file = new File("./side.ser");
-    try (ObjectInputStream in =
-        new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-      sideList = (List<Side>) in.readObject();
-
-      System.out.printf("총 %d개의 사이드 데이터를 로딩했습니다\n", sideList.size());
-    } catch (Exception e) {
-      System.out.println("파일 읽기 중 오류 발생! -" + e.getMessage());
-    }
-  }
-
-  private void saveSideData() {
-    File file = new File("./side.ser");
-
-    try (ObjectOutputStream out =
-        new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-      out.writeObject(sideList);
-      System.out.printf("총 %d개의 사이드 데이터를 저장했습니다\n", sideList.size());
-    } catch (IOException e) {
-      System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadBoardData() {
-    File file = new File("./board.ser");
-    try (ObjectInputStream in =
-        new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-      boardList = (List<Board>) in.readObject();
-      System.out.printf("총 %d개의 게시물 데이터를 로딩했습니다\n", boardList.size());
-    } catch (Exception e) {
-      System.out.println("파일 읽기 중 오류 발생! -" + e.getMessage());
-    }
-  }
-
-  private void saveBoardData() {
-    File file = new File("./board.ser");
-
-    try (ObjectOutputStream out =
-        new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-      out.writeObject(boardList);
-      System.out.printf("총 %d개의 게시물 데이터를 저장했습니다\n", boardList.size());
-    } catch (IOException e) {
-      System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
-    }
-  }
 
   public static void main(String[] args) {
     App app = new App();
+    app.addApplicationContextListener(new DataLoaderListener());
     app.service();
   }
 }
